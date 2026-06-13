@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "paqarina-dev",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js"],
+      "port": 5173
+    },
+    {
+      "name": "rhinoplan-medidas",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "--prefix", "../rhinoplan-medidas", "dev"],
+      "port": 5179
+    }
+  ]
+}
