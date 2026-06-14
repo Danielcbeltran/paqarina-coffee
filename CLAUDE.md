@@ -45,7 +45,9 @@ mi-proyecto/
 ├── .claude/
 │   └── launch.json            # Config del preview server (Vite via node)
 ├── public/
-│   ├── favicon.svg            # La Q oficial (anillo + rombo + swash) sobre #15100C
+│   ├── favicon.svg            # Isotipo: la Q (anillo + rombo + swash) en badge cuadrado #15100C
+│   ├── avatar-512.png         # Isotipo rasterizado 512² (avatar GitHub/Vercel/redes, apple-touch-icon)
+│   ├── avatar-1024.png        # Isotipo rasterizado 1024² (avatar alta resolución, og:image)
 │   ├── logo-paqarina.png      # Wordmark oficial PAQARINA+COFFEE (transparente, para TopBar/menú)
 │   └── logo-paqarina-full.png # Wordmark + tagline "CAFÉ DE ESPECIALIDAD" (para footer)
 └── src/
@@ -182,7 +184,8 @@ STORAGE = {
 - **El wordmark oficial es el PNG** `public/logo-paqarina.png` (PAQARINA + COFFEE) y `public/logo-paqarina-full.png` (con tagline "CAFÉ DE ESPECIALIDAD"). Se generaron a partir del logo oficial (`Paqarina Coffee.jpg`): recortados al wordmark y con el negro convertido a transparencia (alpha por luminancia) para que asienten limpios sobre el oscuro de la UI. Usos: `<img>` en TopBar (`h-7`), SideMenu (`h-7`) y footer del Home (full, `h-16`).
   - **Regenerar** (si cambia el logo): instalar `sharp` (`npm i -D sharp`), correr un script que lea el JPG raw, calcule alpha = `(luminancia−58)/(178−58)` clamp, recorte al bbox (cortando la tagline en y≈580 para la versión de header), y exporte PNG. El original NO se versiona; usar el archivo oficial.
 - **Lo distintivo de la Q es el rombo (diamante) central + la cola caligráfica (swash)** que barre por debajo de la letra. NO es un óvalo, NO es un punto redondo, NO es una "lupa".
-- **`PaqarinaMark`** (`components/atoms.tsx`): versión vector de la **Q** sola (anillo + rombo + swash) para empaques de café, empty states y el header del detalle. El `favicon.svg` replica la misma Q con el rombo agrandado para leer a 16px. El icono "Cafés" del BottomNav (círculo + punto) es un eco intencional del motivo.
+- **`PaqarinaMark`** (`components/atoms.tsx`): versión vector de la **Q** sola (anillo + rombo + swash) para empaques de café, empty states y el header del detalle.
+- **Isotipo (la Q sola)**: `favicon.svg` es el master (Q centrada en badge cuadrado #15100C, dorado #D4B36A, geometría en caja 100×100). `avatar-512/1024.png` son rasterizados con `sharp` desde ese SVG para usos que requieren PNG (avatar de GitHub/Vercel/redes, `apple-touch-icon`, `og:image`). El header de la app mantiene el wordmark completo, no el isotipo. El icono "Cafés" del BottomNav (círculo + punto) es un eco intencional del motivo.
 
 ### Tema visual
 - **Un solo tema activo** — dark con dorado, paleta derivada del logo oficial. Tokens (`src/index.css` `@theme`):
