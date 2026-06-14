@@ -36,7 +36,7 @@ npm run lint         # ESLint
 ```
 mi-proyecto/
 ├── CLAUDE.md                  # Este archivo
-├── README.md                  # Default de Vite (no editado)
+├── README.md                  # Portada del repo (descripción, stack, scripts, demo)
 ├── tsconfig.json              # TS permisivo, allowJs, jsx: react-jsx
 ├── vite.config.js             # Plugins: react + tailwindcss + vitest
 ├── package.json               # Scripts y deps
