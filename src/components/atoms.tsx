@@ -2,16 +2,15 @@ import { useEffect } from "react";
 import type { CSSProperties, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import type { Toast as ToastData } from "../types";
 
-/* La Q de Paqarina: anillo con rombo central y cola caligráfica que barre bajo la letra.
-   Misma geometría base (caja 100×100) que la Q del wordmark, reescalada. */
+/* La Q serif de Paqarina: bowl con contraste de trazo (lados gruesos), diamante
+   central y cola caligráfica que barre a la derecha (guiño al grano de café).
+   Misma geometría que el favicon/avatar y la Q del wordmark oficial. */
 export function PaqarinaMark({ size = 24, color = "var(--color-gold)", style = {} }: { size?: number; color?: string; style?: CSSProperties }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" style={style} aria-hidden="true">
-      <g transform="translate(20 18) scale(0.34) translate(-50 -50)">
-        <circle cx="50" cy="50" r="43" fill="none" stroke={color} strokeWidth="7"/>
-        <path d="M50 32 L61.5 50 L50 68 L38.5 50 Z" fill={color}/>
-        <path d="M20 78 C 33 97, 62 103, 86 92 C 91 89.5, 95.5 86, 99.5 81.5 C 93 101, 71 112, 50 106.5 C 36.5 102.8, 26 92.6, 20 78 Z" fill={color}/>
-      </g>
+    <svg width={size} height={size} viewBox="0 0 96 86" style={style} aria-hidden="true" fill={color}>
+      <path fillRule="evenodd" d="M10,40 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0 Z M24,40 a16,19 0 1,0 32,0 a16,19 0 1,0 -32,0 Z"/>
+      <path d="M40 32 L44.5 40 L40 48 L35.5 40 Z"/>
+      <path d="M34 64 C 50 72 68 70 85 60 C 69 68 51 70 37 68 Z"/>
     </svg>
   );
 }
