@@ -84,7 +84,7 @@ export default function App() {
   };
 
   const sellerRole = seller ? (seller.role || "productor") : null;
-  const sellerEntity: FincaEntity | null = useMemo(() => seller ? { name: seller.fincaName, farmer: seller.farmerName, region: seller.region, altitude: seller.altitude, story: seller.story, certifications: seller.certifications || [], coffees: sellerCoffees.filter(c => !c.draft), isSeller: true, verified: !!seller.verified, joined: seller.joined, kind: sellerRole === "curador" ? "curador" : "finca" } : null, [seller, sellerCoffees, sellerRole]);
+  const sellerEntity: FincaEntity | null = useMemo(() => seller ? { name: seller.fincaName, farmer: seller.farmerName, region: seller.region, altitude: seller.altitude, story: seller.story, certifications: seller.certifications || [], coffees: sellerCoffees.filter(c => !c.draft), isSeller: true, verified: !!seller.verified, joined: seller.joined, kind: sellerRole === "curador" ? "curador" : "finca", logoUrl: seller.logoUrl } : null, [seller, sellerCoffees, sellerRole]);
 
   const producerFincas = useMemo(() => {
     const map = new Map<string, FincaEntity>();
@@ -170,7 +170,11 @@ export default function App() {
     const i = ORDER_STATUSES.indexOf(o.status);
     return { ...o, status: ORDER_STATUSES[Math.min(i + 1, ORDER_STATUSES.length - 1)] };
   }));
-  const updateSeller = (data: Partial<Seller>) => setSeller(prev => ({ ...prev, ...data }));
+  const updateSeller = (data: Partial<Seller>) => {
+    setSeller(prev => ({ ...prev, ...data }));
+    // Si cambió el logo, re-estampa la marca en los cafés del vendedor
+    if ("logoUrl" in data) setSellerCoffees(prev => prev.map(c => c.bySeller ? { ...c, brandLogo: data.logoUrl || "" } : c));
+  };
   const addReview = (data: Partial<Review>) => {
     setReviews(prev => [{ id: "r_" + Date.now(), date: new Date().toISOString(), ...data } as Review, ...prev]);
     showToast("¡Gracias por tu reseña!");

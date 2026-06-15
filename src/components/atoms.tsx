@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { CSSProperties, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import type { Toast as ToastData } from "../types";
-import { brandInitials } from "../lib";
+import { brandInitials, fileToDataURL } from "../lib";
 
 /* La Q oficial de Paqarina (PNG transparente: bowl serif con contraste, diamante
    y cola caligráfica que tapera — guiño al grano). Mismo arte que favicon/avatar. */
@@ -21,6 +21,33 @@ export function BrandMark({ name, size = 18, style = {} }: { name?: string; size
     <span aria-hidden="true" className="font-serif font-medium tracking-[0.08em] leading-none text-gold" style={{ fontSize: size, ...style }}>
       {brandInitials(name)}
     </span>
+  );
+}
+
+/* Subida del logo de marca del vendedor (preview + quitar). Redimensiona a 240px. */
+export function LogoUploader({ value, onChange }: { value?: string; onChange: (url: string) => void }) {
+  const [err, setErr] = useState("");
+  const handle = async (file?: File) => {
+    if (!file) return;
+    setErr("");
+    try { onChange(await fileToDataURL(file, 240, 0.85)); }
+    catch { setErr("No se pudo procesar la imagen."); }
+  };
+  return (
+    <div>
+      {value ? (
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-14 rounded bg-surface-2 border border-line-soft flex items-center justify-center p-1.5 shrink-0">
+            <img src={value} alt="Logo de marca" className="max-w-full max-h-full object-contain"/>
+          </div>
+          <button type="button" onClick={() => onChange("")} className="font-sans text-[11px] px-3 py-[7px] bg-transparent text-ink border border-line cursor-pointer">QUITAR</button>
+        </div>
+      ) : (
+        <input type="file" accept="image/*" onChange={e => handle(e.target.files?.[0])} className="font-sans text-[11px] text-ink"/>
+      )}
+      {err && <div className="mt-1.5 text-[11px] text-[#d77]">{err}</div>}
+      <div className="mt-1.5 text-[10px] text-dim">Aparece en tus empaques cuando un café no tiene foto. PNG transparente recomendado.</div>
+    </div>
   );
 }
 

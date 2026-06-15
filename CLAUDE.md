@@ -60,7 +60,7 @@ mi-proyecto/
     ├── types.ts               # Shapes del dominio (Coffee, Order, Seller…)
     ├── index.css              # Tailwind + @theme tokens + animaciones + a11y
     ├── components/
-    │   ├── atoms.tsx          # PaqarinaMark, BrandMark, Field, Input, Textarea, PillSelect, VerifiedBadge, Stars, Toast, EmptyState, SectionHeader
+    │   ├── atoms.tsx          # PaqarinaMark, BrandMark, LogoUploader, Field, Input, Textarea, PillSelect, VerifiedBadge, Stars, Toast, EmptyState, SectionHeader
     │   ├── chrome.tsx         # TopBar, Hero, CategoryChips, BottomNav, SideMenu, SearchBar, FiltersPanel
     │   ├── coffee.tsx         # CoffeeCard, CoffeeList, ProducerStories, OriginMap, ReviewSection, ProductDetail, HomeScreen, CatalogScreen
     │   ├── farms.tsx          # FarmCard, FarmsScreen, FarmProfile
@@ -87,10 +87,10 @@ mi-proyecto/
 
 ### Entidades principales (ver `src/types.ts`)
 
-- **`Coffee`** — nombre, finca, caficultor, región, altitud, proceso, variedad, notas, score SCA, precio, peso, tueste, fresh, tag, stock, verified, imageUrl, etc. Cafés del vendedor llevan `bySeller`, `sellerId`, `isCurator`, `draft`.
+- **`Coffee`** — nombre, finca, caficultor, región, altitud, proceso, variedad, notas, score SCA, precio, peso, tueste, fresh, tag, stock, verified, imageUrl, etc. Cafés del vendedor llevan `bySeller`, `sellerId`, `isCurator`, `draft`, `brandLogo` (logo de marca estampado al guardar).
 - **`CartItem`** = `Coffee` + `qty` + `grind` opcional.
 - **`Order`** — id, fecha, customer, items, subtotal, shipping, total, status, byUser, shippingMethod, paymentMethod, notes.
-- **`Seller`** — id, role, fincaName, farmerName, region, altitude, story, certifications, verified, joined.
+- **`Seller`** — id, role, fincaName, farmerName, region, altitude, story, certifications, verified, joined, `logoUrl` (logo de marca subido).
 - **`Customer`** — name, email, phone, address, city, shippingId, paymentId (se guarda tras checkout).
 - **`Subscription`** — planId + startDate.
 - **`Review`** — id, coffeeId, customerName, customerEmail, rating, comment, date.
@@ -171,7 +171,8 @@ STORAGE = {
 
 ### Atoms / utilidades (`components/atoms.tsx`)
 - **`PaqarinaMark`** — la **Q** suelta para empty states y el header del detalle. El wordmark completo usa el PNG oficial, no vector.
-- **`BrandMark`** — monograma (iniciales) de la **marca del vendedor** para el empaque del café. Cada finca/marca muestra su propio sello, NO el isotipo de Paqarina (que es el marketplace, no el productor). Iniciales vía `brandInitials()` en `lib.ts` (ignora prefijos genéricos: Finca, Hacienda, La, El…).
+- **`BrandMark`** — monograma (iniciales) de la **marca del vendedor** para el empaque del café, **fallback** cuando el café no tiene `brandLogo`. Cada finca/marca muestra su propio sello, NO el isotipo de Paqarina (que es el marketplace, no el productor). Iniciales vía `brandInitials()` en `lib.ts` (ignora prefijos genéricos: Finca, Hacienda, La, El…).
+- **`LogoUploader`** — sube/previsualiza el logo de marca del vendedor (canvas resize a 240px → base64). Usado en onboarding y `FincaEditor`. El logo se estampa en `Coffee.brandLogo` al guardar cada café (y se re-estampa en todos los cafés del vendedor cuando cambia, vía `updateSeller` en `App.tsx`). Prioridad en el empaque: foto del café (`imageUrl`) → logo de marca (`brandLogo`) → monograma (`BrandMark`).
 - **`Field`** — wrapper consistente para inputs con label uppercase.
 - **`Input`** / **`Textarea`** — inputs con el estilo base del tema (reemplazan al viejo `inputStyle(t)`).
 - **`PillSelect`** — selector pill, single o multi.
@@ -245,6 +246,7 @@ STORAGE = {
 ### Para vendedores
 - ✅ Onboarding con selector de rol (Productor/Tostador)
 - ✅ CRUD de cafés con stock, borrador, foto, color de empaque, notas, score, etiquetas
+- ✅ Logo de marca propio (subido en onboarding/perfil) — aparece en los empaques de sus cafés; monograma de iniciales como fallback
 - ✅ Pedidos con estados avanzables (Nuevo → Preparando → Enviado → Entregado)
 - ✅ Resumen de ventas (Ingresos, Comisión 10%, Ganancia, Unidades, Top café)
 - ✅ Sparkline de ventas últimos 7 días

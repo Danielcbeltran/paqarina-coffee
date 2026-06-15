@@ -36,6 +36,7 @@ export interface Coffee {
   sellerId?: string;
   draft?: boolean;
   imageUrl?: string;
+  brandLogo?: string; // logo de la marca del vendedor (sello en el empaque)
 }
 
 export interface CartItem extends Coffee {
@@ -92,6 +93,7 @@ export interface Seller {
   certifications?: string[];
   verified?: boolean;
   joined: string;
+  logoUrl?: string; // logo de marca subido por el vendedor
 }
 
 export interface Subscription {
@@ -130,6 +132,7 @@ export interface FincaEntity {
   kind: "finca" | "curador";
   verified: boolean;
   joined?: string;
+  logoUrl?: string;
 }
 
 export type Toast = { id: number; text: string } | null;

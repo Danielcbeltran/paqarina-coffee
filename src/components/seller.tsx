@@ -5,12 +5,12 @@ import {
 } from "../data";
 import { fileToDataURL, fmt, fmtDate } from "../lib";
 import type { Coffee, Customer, Order, Seller, SellerRole, Subscription } from "../types";
-import { EmptyState, Field, Input, PillSelect, SectionHeader, Textarea, VerifiedBadge } from "./atoms";
+import { EmptyState, Field, Input, LogoUploader, PillSelect, SectionHeader, Textarea, VerifiedBadge } from "./atoms";
 import { BuyerOrders, BuyerProfile, SubscriptionStatus } from "./buyer";
 
 export function SellerOnboarding({ onRegister }: { onRegister: (data: Partial<Seller> & { role: SellerRole }) => void }) {
   const [role, setRole] = useState<SellerRole>("productor");
-  const [f, setF] = useState({ fincaName: "", farmerName: "", region: "", altitude: "", story: "", certifications: [] as string[] });
+  const [f, setF] = useState({ fincaName: "", farmerName: "", region: "", altitude: "", story: "", certifications: [] as string[], logoUrl: "" });
   const i = ROLE_INFO[role];
   const set = (k: string, v: string) => setF(p => ({ ...p, [k]: v }));
   const toggleCert = (c: string) => setF(p => ({ ...p, certifications: p.certifications.includes(c) ? p.certifications.filter(x => x !== c) : [...p.certifications, c] }));
@@ -38,6 +38,7 @@ export function SellerOnboarding({ onRegister }: { onRegister: (data: Partial<Se
       <Field label={i.placeLabel}><Input value={f.region} onChange={e => set("region", e.target.value)} placeholder={i.placePh}/></Field>
       <Field label={i.extraLabel}><Input value={f.altitude} onChange={e => set("altitude", e.target.value)} placeholder={i.extraPh}/></Field>
       <Field label={i.storyLabel}><Textarea value={f.story} onChange={e => set("story", e.target.value)} rows={4} placeholder={i.storyPh}/></Field>
+      <Field label={role === "curador" ? "Logo de tu marca (opcional)" : "Logo de tu finca (opcional)"}><LogoUploader value={f.logoUrl} onChange={url => set("logoUrl", url)}/></Field>
       <Field label={i.tagsLabel}><PillSelect options={i.tagsOptions} value={f.certifications} onChange={toggleCert} multi/></Field>
       <button disabled={!valid} onClick={() => onRegister({ ...f, role })} className={`mt-2 w-full border-none p-4 font-sans text-xs font-semibold tracking-[0.2em] ${valid ? "bg-gold text-page cursor-pointer" : "bg-surface-2 text-dim cursor-not-allowed"}`}>
         {i.cta}
@@ -84,6 +85,7 @@ export function CoffeeForm({ seller, initial, onSave, onClose }: { seller: Selle
       img: GRADIENTS[f.gi].img, bean: GRADIENTS[f.gi].bean, bySeller: true, sellerId: seller.id,
       isCurator: seller.role === "curador",
       stock: Math.max(0, Number(f.stock) || 0), draft: !!f.draft, imageUrl: f.imageUrl || "",
+      brandLogo: seller.logoUrl || "",
       verified: src?.verified || false,
     };
     onSave(coffee);
@@ -279,7 +281,7 @@ export function FincaEditor({ seller, onUpdate, onOpenFarm, onReset, onRequestVe
   onReset: () => void; onRequestVerification: () => void;
 }) {
   const isCurador = seller.role === "curador";
-  const [f, setF] = useState({ fincaName: seller.fincaName, farmerName: seller.farmerName, region: seller.region, altitude: seller.altitude || "", story: seller.story || "", certifications: seller.certifications || [] });
+  const [f, setF] = useState({ fincaName: seller.fincaName, farmerName: seller.farmerName, region: seller.region, altitude: seller.altitude || "", story: seller.story || "", certifications: seller.certifications || [], logoUrl: seller.logoUrl || "" });
   const set = (k: string, v: string) => setF(p => ({ ...p, [k]: v }));
   const toggleCert = (c: string) => setF(p => ({ ...p, certifications: p.certifications.includes(c) ? p.certifications.filter(x => x !== c) : [...p.certifications, c] }));
   const [saved, setSaved] = useState(false);
@@ -296,6 +298,7 @@ export function FincaEditor({ seller, onUpdate, onOpenFarm, onReset, onRequestVe
       <Field label={isCurador ? "Ciudad" : "Región"}><Input value={f.region} onChange={e => set("region", e.target.value)}/></Field>
       <Field label={isCurador ? "Credencial" : "Altitud"}><Input value={f.altitude} onChange={e => set("altitude", e.target.value)}/></Field>
       <Field label={isCurador ? "Sobre tu marca" : "Historia"}><Textarea value={f.story} onChange={e => set("story", e.target.value)} rows={4}/></Field>
+      <Field label={isCurador ? "Logo de tu marca" : "Logo de tu finca"}><LogoUploader value={f.logoUrl} onChange={url => set("logoUrl", url)}/></Field>
       <Field label={isCurador ? "Especialidades" : "Certificaciones"}><PillSelect options={isCurador ? CURATOR_TAGS : CERTS} value={f.certifications} onChange={toggleCert} multi/></Field>
       <div className="flex gap-2.5 mt-1.5">
         <button onClick={save} className="flex-1 bg-gold text-page border-none p-3.5 font-sans text-[11px] font-semibold tracking-[0.16em] cursor-pointer">{saved ? "✓ GUARDADO" : "GUARDAR CAMBIOS"}</button>

@@ -61,6 +61,11 @@ export function FarmProfile({ finca, onBack, onAdd, onOpenCoffee, favorites, onT
       <div className="flex-1 overflow-y-auto">
         <div className="h-[170px] relative flex items-end p-[18px]" style={{ background: farmCover(finca) }}>
           {finca.isSeller && <div className="absolute top-3.5 right-3.5 bg-gold text-page px-2.5 py-1 text-[9px] font-sans font-bold tracking-[0.14em]">{isCurador ? "TU MARCA" : "TU FINCA"}</div>}
+          {finca.logoUrl && (
+            <div className="w-[68px] h-[68px] rounded-xl bg-page border border-line flex items-center justify-center p-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+              <img src={finca.logoUrl} alt={`Logo ${finca.name}`} className="max-w-full max-h-full object-contain"/>
+            </div>
+          )}
         </div>
         <div className="pt-[22px] px-[22px] pb-[110px]">
           <div className="font-sans text-[9px] tracking-[0.28em] text-gold font-semibold mb-2">{finca.region}</div>

@@ -126,6 +126,7 @@ export function makeStarterCoffees(seller) {
     altitude: seller.altitude || "1.800 msnm",
     bySeller: true, sellerId: seller.id, fairtrade: true,
     isCurator: seller.role === "curador", verified: false, draft: false,
+    brandLogo: seller.logoUrl || "",
   };
   return [
     { ...base, id:"s_demo_1", name:"Mi Primer Lote", variety:"Caturra", process:"Lavado", roast:"Medio", price:72000, weight:"340g", notes:["Panela","Chocolate","Cítricos"], score:86, micro:false, fresh:"Tueste a pedido", tag:"Novedad", img:GRADIENTS[1].img, bean:GRADIENTS[1].bean, stock:20 },

@@ -26,7 +26,9 @@ export function CoffeeCard({ coffee, onAdd, onOpen, isFav, onToggleFav }: { coff
         </button>
         {!coffee.imageUrl && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92px] h-[124px] rounded-[4px_4px_6px_6px] shadow-[0_12px_32px_rgba(0,0,0,0.4),inset_0_-8px_12px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center py-2.5 px-1.5 text-gold" style={{ background: `linear-gradient(180deg,${coffee.bean}f0 0%,${coffee.bean} 100%)` }}>
-            <BrandMark name={coffee.farm} size={20}/>
+            {coffee.brandLogo
+              ? <img src={coffee.brandLogo} alt="" className="h-7 max-w-[64px] object-contain"/>
+              : <BrandMark name={coffee.farm} size={20}/>}
             <div className="font-serif text-[10px] mt-1.5 tracking-[0.1em] text-center opacity-85">{(coffee.variety || "").toUpperCase()}</div>
             <div className="w-[22px] h-px bg-gold opacity-50 my-1 inline-block"/>
             <div className="font-sans text-[7px] tracking-[0.2em] opacity-60">{coffee.weight}</div>
@@ -210,7 +212,9 @@ export function ProductDetail({ coffee, onBack, onAdd, onOpenFarm, isFav, onTogg
         <div className="h-[320px] flex items-center justify-center" style={{ background: coffee.imageUrl ? `url(${coffee.imageUrl}) center/cover` : coffee.img }}>
           {!coffee.imageUrl && (
             <div className="w-[150px] h-[200px] rounded-[6px_6px_10px_10px] shadow-[0_24px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-[18px] text-gold" style={{ background: `linear-gradient(180deg,${coffee.bean}f0 0%,${coffee.bean} 100%)` }}>
-              <BrandMark name={coffee.farm} size={34}/>
+              {coffee.brandLogo
+                ? <img src={coffee.brandLogo} alt="" className="h-[52px] max-w-[110px] object-contain"/>
+                : <BrandMark name={coffee.farm} size={34}/>}
               <div className="font-serif text-base mt-3 tracking-[0.12em] text-center">{(coffee.variety || "").toUpperCase()}</div>
               <div className="w-8 h-px bg-gold opacity-50 my-2 inline-block"/>
               <div className="font-sans text-[9px] tracking-[0.24em] opacity-70">{coffee.weight}</div>

@@ -86,8 +86,10 @@ export function CartView({ items, onClose, onRemove, onUpdateQty, onCheckout, on
               <div key={i} className="flex gap-3 py-3.5 border-b border-line-soft">
                 <div className="w-16 h-[84px] shrink-0 flex items-center justify-center" style={{ background: it.imageUrl ? `url(${it.imageUrl}) center/cover` : it.img }}>
                   {!it.imageUrl && (
-                    <div className="w-[38px] h-14 rounded-[3px] flex items-center justify-center" style={{ background: it.bean }}>
-                      <BrandMark name={it.farm} size={15}/>
+                    <div className="w-[38px] h-14 rounded-[3px] flex items-center justify-center p-1" style={{ background: it.bean }}>
+                      {it.brandLogo
+                        ? <img src={it.brandLogo} alt="" className="max-w-full max-h-full object-contain"/>
+                        : <BrandMark name={it.farm} size={15}/>}
                     </div>
                   )}
                 </div>
