@@ -28,7 +28,7 @@ export function Hero({ onExplore, onFarms, onCurators }: { onExplore: () => void
     <div className="pt-8 px-[22px] pb-7 bg-page relative overflow-hidden">
       <div className="relative z-[1]">
         <div className="font-sans text-[10px] tracking-[0.32em] text-gold font-semibold mb-3.5 flex items-center gap-2.5">
-          <span className="w-5 h-px bg-gold inline-block"/> COSECHA 2026
+          <span className="w-5 h-px bg-gold inline-block"/> CAFÉ DE ESPECIALIDAD
         </div>
         <h1 className="font-display text-[42px] leading-[1.02] font-medium text-ink m-0 tracking-[-0.01em]">
           El despertar<br/>de un <em className="text-gold italic">origen</em>.

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PAYMENT_METHODS, SHIPPING_METHODS } from "../data";
 import { findShipping, fmt } from "../lib";
 import type { CartItem, Customer, Order } from "../types";
-import { EmptyState, Field, Input, PaqarinaMark, Textarea } from "./atoms";
+import { BrandMark, EmptyState, Field, Input, Textarea } from "./atoms";
 
 interface CheckoutData {
   customer: Customer;
@@ -87,7 +87,7 @@ export function CartView({ items, onClose, onRemove, onUpdateQty, onCheckout, on
                 <div className="w-16 h-[84px] shrink-0 flex items-center justify-center" style={{ background: it.imageUrl ? `url(${it.imageUrl}) center/cover` : it.img }}>
                   {!it.imageUrl && (
                     <div className="w-[38px] h-14 rounded-[3px] flex items-center justify-center" style={{ background: it.bean }}>
-                      <PaqarinaMark size={14}/>
+                      <BrandMark name={it.farm} size={15}/>
                     </div>
                   )}
                 </div>

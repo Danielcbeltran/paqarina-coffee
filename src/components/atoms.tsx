@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import type { CSSProperties, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import type { Toast as ToastData } from "../types";
+import { brandInitials } from "../lib";
 
 /* La Q oficial de Paqarina (PNG transparente: bowl serif con contraste, diamante
    y cola caligráfica que tapera — guiño al grano). Mismo arte que favicon/avatar. */
@@ -12,6 +13,16 @@ export function PaqarinaMark({ size = 24, style = {} }: { size?: number; color?:
 
 /* El wordmark "PAQARINA COFFEE" se renderiza con el PNG oficial
    (public/logo-paqarina.png / logo-paqarina-full.png), no con vector. */
+
+/* Monograma de la marca del vendedor (iniciales) para el empaque del café.
+   Cada finca/marca muestra su propio sello, no el isotipo de Paqarina. */
+export function BrandMark({ name, size = 18, style = {} }: { name?: string; size?: number; style?: CSSProperties }) {
+  return (
+    <span aria-hidden="true" className="font-serif font-medium tracking-[0.08em] leading-none text-gold" style={{ fontSize: size, ...style }}>
+      {brandInitials(name)}
+    </span>
+  );
+}
 
 /* ---------- Form fields ---------- */
 const inputCls = "w-full bg-surface border border-line text-ink px-3 py-[10px] font-sans text-[13px] outline-none rounded-[2px]";

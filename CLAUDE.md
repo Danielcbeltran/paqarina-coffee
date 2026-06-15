@@ -60,7 +60,7 @@ mi-proyecto/
     ├── types.ts               # Shapes del dominio (Coffee, Order, Seller…)
     ├── index.css              # Tailwind + @theme tokens + animaciones + a11y
     ├── components/
-    │   ├── atoms.tsx          # PaqarinaMark/Logo, Field, Input, Textarea, PillSelect, VerifiedBadge, Stars, Toast, EmptyState, SectionHeader
+    │   ├── atoms.tsx          # PaqarinaMark, BrandMark, Field, Input, Textarea, PillSelect, VerifiedBadge, Stars, Toast, EmptyState, SectionHeader
     │   ├── chrome.tsx         # TopBar, Hero, CategoryChips, BottomNav, SideMenu, SearchBar, FiltersPanel
     │   ├── coffee.tsx         # CoffeeCard, CoffeeList, ProducerStories, OriginMap, ReviewSection, ProductDetail, HomeScreen, CatalogScreen
     │   ├── farms.tsx          # FarmCard, FarmsScreen, FarmProfile
@@ -170,7 +170,8 @@ STORAGE = {
 - **`EmptyState`** — patrón reutilizable: icono + título + mensaje + CTA opcional.
 
 ### Atoms / utilidades (`components/atoms.tsx`)
-- **`PaqarinaMark`** — la **Q** suelta (vector) para empaques, empty states y headers compactos. El wordmark completo usa el PNG oficial, no vector.
+- **`PaqarinaMark`** — la **Q** suelta para empty states y el header del detalle. El wordmark completo usa el PNG oficial, no vector.
+- **`BrandMark`** — monograma (iniciales) de la **marca del vendedor** para el empaque del café. Cada finca/marca muestra su propio sello, NO el isotipo de Paqarina (que es el marketplace, no el productor). Iniciales vía `brandInitials()` en `lib.ts` (ignora prefijos genéricos: Finca, Hacienda, La, El…).
 - **`Field`** — wrapper consistente para inputs con label uppercase.
 - **`Input`** / **`Textarea`** — inputs con el estilo base del tema (reemplazan al viejo `inputStyle(t)`).
 - **`PillSelect`** — selector pill, single o multi.
@@ -186,7 +187,7 @@ STORAGE = {
   - **Regenerar** (si cambia el logo): instalar `sharp` (`npm i -D sharp`), correr un script que lea el JPG raw, calcule alpha = `(luminancia−58)/(178−58)` clamp, recorte al bbox (cortando la tagline en y≈580 para la versión de header), y exporte PNG. El original NO se versiona; usar el archivo oficial.
 - **Lo distintivo de la Q**: es una **Q serif** con (1) **bowl de trazo con contraste** (lados gruesos, arriba/abajo finos — no un anillo geométrico uniforme), (2) un **diamante (rombo) en el centro** del counter, y (3) una **cola caligráfica que barre a la derecha y tapera a punta** (guiño sutil a un grano de café). NO es un óvalo, NO es un punto redondo, NO es una "lupa", NO es una cola que cae por debajo.
 - **El arte de la Q es oficial (raster), no vector**. Archivos fuente del diseñador: `q-final2-transparent.png` (Q dorada transparente 1000²), `q-final2-ink.png` (Q sobre tinta) y `q-final2-favicon-512.png` (optimizada para favicon). NO viven en el repo — están en `~/Downloads`.
-- **`PaqarinaMark`** (`components/atoms.tsx`): renderiza `<img src="/q-mark.png">` (la Q oficial transparente, recortada) para empaques de café, empty states y el header del detalle. Es raster gold; ya no acepta recolor.
+- **`PaqarinaMark`** (`components/atoms.tsx`): renderiza `<img src="/q-mark.png">` (la Q oficial transparente, recortada) para empty states y el header del detalle. Es raster gold; ya no acepta recolor. **No** se usa en empaques de café — ahí va `BrandMark` (la marca del vendedor).
 - **Isotipo (la Q sola)**: `favicon.png` y `avatar-512/1024.png` se generan con `sharp` componiendo la Q oficial transparente sobre un badge cuadrado redondeado #15100C. **Regenerar**: `npm i -D sharp`, copiar las `q-final2-*.png` de Downloads a `public/`, y correr el script de composición (badge rx 22%, Q al ~62% centrada con `.trim()`); ver historial de git. El header de la app mantiene el wordmark completo, no el isotipo. El icono "Cafés" del BottomNav (círculo + punto) es un eco intencional del motivo.
 
 ### Tema visual

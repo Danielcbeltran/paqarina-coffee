@@ -29,6 +29,17 @@ export const fmtDate = (iso) => {
   return d.toLocaleDateString("es-CO", { day:"numeric", month:"short", year:"numeric" });
 };
 
+// Monograma de marca: iniciales de la finca/marca para el empaque del café
+// (cada vendedor muestra su propia marca, no la de Paqarina).
+const BRAND_STOPWORDS = new Set(["finca", "hacienda", "asoc", "asociacion", "asociación", "coop", "cooperativa", "la", "el", "los", "las", "de", "del", "y"]);
+export function brandInitials(name = "") {
+  const clean = (w) => w.toLowerCase().replace(/[.,&]/g, "");
+  const words = String(name).split(/\s+/).filter(w => w && !BRAND_STOPWORDS.has(clean(w)) && clean(w));
+  if (words.length === 0) return (String(name).trim()[0] || "·").toUpperCase();
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
 // Lookups
 export const findShipping = (id) => SHIPPING_METHODS.find(s => s.id === id) || SHIPPING_METHODS[0];
 export const findPayment = (id) => PAYMENT_METHODS.find(p => p.id === id) || PAYMENT_METHODS[0];

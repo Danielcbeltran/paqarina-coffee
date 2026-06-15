@@ -7,6 +7,7 @@ import {
   findPayment,
   findPlan,
   storyFor,
+  brandInitials,
   makeStarterCoffees,
   cartKey,
   addItemToCart,
@@ -112,6 +113,26 @@ describe("storyFor", () => {
   it("cae a una historia genérica para fincas desconocidas", () => {
     const coffee = { farm: "Finca Inventada" };
     expect(storyFor(coffee as any, null as any)).toContain("especialidad");
+  });
+});
+
+describe("brandInitials", () => {
+  it("toma iniciales de dos palabras significativas", () => {
+    expect(brandInitials("Tinto Lab")).toBe("TL");
+    expect(brandInitials("Altura Roasters")).toBe("AR");
+  });
+  it("ignora prefijos genéricos (Finca, Hacienda, La, El…)", () => {
+    expect(brandInitials("Finca El Paraíso")).toBe("PA");
+    expect(brandInitials("Hacienda Venecia")).toBe("VE");
+    expect(brandInitials("La Palma & El Tucán")).toBe("PT");
+    expect(brandInitials("Asoc. Mujeres Cafeteras")).toBe("MC");
+  });
+  it("usa dos letras si queda una sola palabra", () => {
+    expect(brandInitials("Finca Tamana")).toBe("TA");
+  });
+  it("no rompe con vacío", () => {
+    expect(brandInitials("")).toBe("·");
+    expect(brandInitials(undefined as any)).toBe("·");
   });
 });
 
