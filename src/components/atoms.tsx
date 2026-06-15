@@ -7,10 +7,10 @@ import type { Toast as ToastData } from "../types";
    Misma geometría que el favicon/avatar y la Q del wordmark oficial. */
 export function PaqarinaMark({ size = 24, color = "var(--color-gold)", style = {} }: { size?: number; color?: string; style?: CSSProperties }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 96 86" style={style} aria-hidden="true" fill={color}>
-      <path fillRule="evenodd" d="M10,40 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0 Z M24,40 a16,19 0 1,0 32,0 a16,19 0 1,0 -32,0 Z"/>
-      <path d="M40 32 L44.5 40 L40 48 L35.5 40 Z"/>
-      <path d="M34 64 C 50 72 68 70 85 60 C 69 68 51 70 37 68 Z"/>
+    <svg width={size} height={size} viewBox="0 0 92 82" style={style} aria-hidden="true" fill={color}>
+      <path fillRule="evenodd" d="M11,40 a29,29 0 1,0 58,0 a29,29 0 1,0 -58,0 Z M20.5,38.5 a21,23 0 1,0 42,0 a21,23 0 1,0 -42,0 Z"/>
+      <path d="M40 34 L44 39 L40 44 L36 39 Z"/>
+      <path d="M40 67 C 54 69 67 68 80 61 C 69 68 54 73 40 71 Z"/>
     </svg>
   );
 }

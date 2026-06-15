@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Isotipo Paqarina: la Q serif (bowl con contraste, diamante central y
-       cola caligráfica que barre a la derecha — guiño al grano de café),
-       centrada en badge cuadrado. Misma geometría que el wordmark. -->
+  <!-- Isotipo Paqarina: la Q serif del logo — bowl con contraste de trazo
+       (más grueso abajo-izquierda), diamante pequeño en el counter y cola
+       caligráfica que tapera a punta hacia la derecha (guiño al grano). -->
   <rect width="100" height="100" rx="22" fill="#15100C"/>
-  <g transform="translate(50 50) scale(0.83) translate(-47.5 -40)" fill="#D4B36A">
-    <path fill-rule="evenodd" d="M10,40 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0 Z M24,40 a16,19 0 1,0 32,0 a16,19 0 1,0 -32,0 Z"/>
-    <path d="M40 32 L44.5 40 L40 48 L35.5 40 Z"/>
-    <path d="M34 64 C 50 72 68 70 85 60 C 69 68 51 70 37 68 Z"/>
+  <g transform="translate(50 50) scale(0.84) translate(-45.5 -41)" fill="#D4B36A">
+    <path fill-rule="evenodd" d="M11,40 a29,29 0 1,0 58,0 a29,29 0 1,0 -58,0 Z M20.5,38.5 a21,23 0 1,0 42,0 a21,23 0 1,0 -42,0 Z"/>
+    <path d="M40 34 L44 39 L40 44 L36 39 Z"/>
+    <path d="M40 67 C 54 69 67 68 80 61 C 69 68 54 73 40 71 Z"/>
   </g>
 </svg>
