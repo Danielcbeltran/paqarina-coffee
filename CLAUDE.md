@@ -45,9 +45,10 @@ mi-proyecto/
 ├── .claude/
 │   └── launch.json            # Config del preview server (Vite via node)
 ├── public/
-│   ├── favicon.svg            # Isotipo: la Q (anillo + rombo + swash) en badge cuadrado #15100C
-│   ├── avatar-512.png         # Isotipo rasterizado 512² (avatar GitHub/Vercel/redes, apple-touch-icon)
-│   ├── avatar-1024.png        # Isotipo rasterizado 1024² (avatar alta resolución, og:image)
+│   ├── favicon.png            # Isotipo: la Q oficial sobre badge cuadrado #15100C (512²)
+│   ├── q-mark.png             # La Q oficial sola, transparente (isotipo dentro de la app)
+│   ├── avatar-512.png         # Isotipo sobre badge 512² (avatar GitHub/Vercel/redes, apple-touch-icon)
+│   ├── avatar-1024.png        # Isotipo sobre badge 1024² (avatar alta resolución, og:image)
 │   ├── logo-paqarina.png      # Wordmark oficial PAQARINA+COFFEE (transparente, para TopBar/menú)
 │   └── logo-paqarina-full.png # Wordmark + tagline "CAFÉ DE ESPECIALIDAD" (para footer)
 └── src/
@@ -184,8 +185,9 @@ STORAGE = {
 - **El wordmark oficial es el PNG** `public/logo-paqarina.png` (PAQARINA + COFFEE) y `public/logo-paqarina-full.png` (con tagline "CAFÉ DE ESPECIALIDAD"). Se generaron a partir del logo oficial (`Paqarina Coffee.jpg`): recortados al wordmark y con el negro convertido a transparencia (alpha por luminancia) para que asienten limpios sobre el oscuro de la UI. Usos: `<img>` en TopBar (`h-7`), SideMenu (`h-7`) y footer del Home (full, `h-16`).
   - **Regenerar** (si cambia el logo): instalar `sharp` (`npm i -D sharp`), correr un script que lea el JPG raw, calcule alpha = `(luminancia−58)/(178−58)` clamp, recorte al bbox (cortando la tagline en y≈580 para la versión de header), y exporte PNG. El original NO se versiona; usar el archivo oficial.
 - **Lo distintivo de la Q**: es una **Q serif** con (1) **bowl de trazo con contraste** (lados gruesos, arriba/abajo finos — no un anillo geométrico uniforme), (2) un **diamante (rombo) en el centro** del counter, y (3) una **cola caligráfica que barre a la derecha y tapera a punta** (guiño sutil a un grano de café). NO es un óvalo, NO es un punto redondo, NO es una "lupa", NO es una cola que cae por debajo.
-- **`PaqarinaMark`** (`components/atoms.tsx`): versión vector de esa Q serif (viewBox 96×86; bowl como path `evenodd` para el contraste + diamante + cola) para empaques de café, empty states y el header del detalle. Acepta `color`.
-- **Isotipo (la Q sola)**: `favicon.svg` es el master (la misma Q serif centrada en badge cuadrado #15100C, dorado #D4B36A). `avatar-512/1024.png` se rasterizan con `sharp` desde ese SVG para usos que requieren PNG (avatar de GitHub/Vercel/redes, `apple-touch-icon`, `og:image`). A ≤16px la cola se pierde pero el núcleo (bowl + diamante) sigue leyendo. El header de la app mantiene el wordmark completo, no el isotipo. El icono "Cafés" del BottomNav (círculo + punto) es un eco intencional del motivo.
+- **El arte de la Q es oficial (raster), no vector**. Archivos fuente del diseñador: `q-final2-transparent.png` (Q dorada transparente 1000²), `q-final2-ink.png` (Q sobre tinta) y `q-final2-favicon-512.png` (optimizada para favicon). NO viven en el repo — están en `~/Downloads`.
+- **`PaqarinaMark`** (`components/atoms.tsx`): renderiza `<img src="/q-mark.png">` (la Q oficial transparente, recortada) para empaques de café, empty states y el header del detalle. Es raster gold; ya no acepta recolor.
+- **Isotipo (la Q sola)**: `favicon.png` y `avatar-512/1024.png` se generan con `sharp` componiendo la Q oficial transparente sobre un badge cuadrado redondeado #15100C. **Regenerar**: `npm i -D sharp`, copiar las `q-final2-*.png` de Downloads a `public/`, y correr el script de composición (badge rx 22%, Q al ~62% centrada con `.trim()`); ver historial de git. El header de la app mantiene el wordmark completo, no el isotipo. El icono "Cafés" del BottomNav (círculo + punto) es un eco intencional del motivo.
 
 ### Tema visual
 - **Un solo tema activo** — dark con dorado, paleta derivada del logo oficial. Tokens (`src/index.css` `@theme`):
