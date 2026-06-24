@@ -109,7 +109,7 @@ export function OriginMap() {
     <div className="my-6 mx-[18px] bg-surface border border-line p-[22px] relative overflow-hidden">
       <div className="font-sans text-[9px] tracking-[0.28em] text-gold font-semibold mb-1.5">ORIGEN</div>
       <h3 className="font-serif text-[22px] font-medium text-ink mt-0 mb-1 leading-[1.1]">De la montaña a tu taza</h3>
-      <p className="font-sans text-[11px] text-muted mt-1.5 mb-4 leading-[1.5]">68 fincas activas en 6 departamentos cafeteros</p>
+      <p className="font-sans text-[11px] text-muted mt-1.5 mb-4 leading-[1.5]">Más de 80 fincas activas en 10 departamentos cafeteros</p>
       <svg viewBox="0 0 100 70" className="w-full h-[180px]">
         <path d="M 30 8 L 48 6 L 58 14 L 62 24 L 60 34 L 64 42 L 60 52 L 52 60 L 44 62 L 36 58 L 28 50 L 22 38 L 24 26 L 28 16 Z" fill="var(--color-surface-2)" stroke="var(--color-line)" strokeWidth="0.3"/>
         {points.map((p, i) => (
