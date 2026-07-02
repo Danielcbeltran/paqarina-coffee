@@ -124,7 +124,7 @@ STORAGE = {
 - **`CategoryChips`** — chips horizontales (Todos, Favoritos, Microlotes, Comercio justo, Tueste a pedido, Mujeres caficultoras, Anaeróbicos).
 
 ### Pantallas (Screens) (`components/coffee.tsx`, `farms.tsx`, `seller.tsx`)
-- **`HomeScreen`** — pantalla de bienvenida limpia, **sin catálogo**: Hero + banda-resumen "N cafés disponibles →" (navega a Cafés) + ProducerStories + OriginMap + footer. El catálogo vive en la pestaña Cafés; buscar desde Inicio también salta a Cafés.
+- **`HomeScreen`** — pantalla de bienvenida limpia, **sin catálogo**: Hero + ProducerStories + OriginMap + footer. El catálogo vive en la pestaña Cafés; buscar desde Inicio también salta a Cafés.
 - **`CatalogScreen`** — versión enfocada del catálogo (solo header + chips + lista).
 - **`FarmsScreen`** — lista de fincas o tostadores (mismo componente, distinto contenido según pestaña activa).
 - **`ProfileScreen`** — sección Tú. Si no eres vendedor, muestra `BuyerProfile`. Si lo eres, un **toggle Comprador/Vendedor** arriba que cambia entre:

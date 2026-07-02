@@ -209,7 +209,7 @@ export default function App() {
         {searchOpen && <SearchBar value={searchQuery} onChange={setSearchQuery} onClose={() => { setSearchQuery(""); setSearchOpen(false); }}/>}
 
         <div className="flex-1 overflow-y-auto [scrollbar-width:none]">
-          {activeNav === "home" && <HomeScreen coffeeCount={allCoffees.length} onExplore={() => setActiveNav("shop")} onFarms={() => setActiveNav("farms")} onCurators={() => setActiveNav("curators")}/>}
+          {activeNav === "home" && <HomeScreen onExplore={() => setActiveNav("shop")} onFarms={() => setActiveNav("farms")} onCurators={() => setActiveNav("curators")}/>}
           {activeNav === "shop" && <CatalogScreen coffees={filtered} activeCat={activeCat} setActiveCat={setActiveCat} onAdd={addToCart} onOpen={setOpenCoffee} favorites={favorites} onToggleFav={toggleFav} onOpenFilters={() => setFiltersOpen(true)} hasActiveFilters={hasActiveFilters || !!searchQuery} onClearAll={clearAll}/>}
           {activeNav === "farms" && <FarmsScreen fincas={producerFincas} onOpenFarm={openFarmByName} kicker="ORIGEN" title={`${producerFincas.length} fincas`}/>}
           {activeNav === "curators" && <FarmsScreen fincas={curatorBrands} onOpenFarm={openFarmByName} kicker="MARCAS" title={`${curatorBrands.length} tostadores`}/>}

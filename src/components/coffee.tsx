@@ -300,14 +300,10 @@ function FiltersButton({ onOpenFilters, hasActiveFilters }: { onOpenFilters: () 
 }
 
 /* Inicio limpio: solo bienvenida y editorial. El catálogo vive en la pestaña "Cafés". */
-export function HomeScreen({ coffeeCount, onExplore, onFarms, onCurators }: { coffeeCount: number; onExplore: () => void; onFarms: () => void; onCurators: () => void }) {
+export function HomeScreen({ onExplore, onFarms, onCurators }: { onExplore: () => void; onFarms: () => void; onCurators: () => void }) {
   return (
     <>
       <Hero onExplore={onExplore} onFarms={onFarms} onCurators={onCurators}/>
-      <button onClick={onExplore} className="w-full bg-transparent border-y border-line py-4 px-[22px] flex items-center justify-between cursor-pointer">
-        <span className="font-sans text-[9px] tracking-[0.28em] text-gold font-semibold">SELECCIÓN ACTIVA</span>
-        <span className="font-serif text-base text-ink">{coffeeCount} cafés disponibles <span className="text-dim font-sans text-xs">→</span></span>
-      </button>
       <ProducerStories onSeeAll={onFarms}/>
       <OriginMap/>
       <div className="pt-8 px-[22px] pb-6 text-center border-t border-line">
