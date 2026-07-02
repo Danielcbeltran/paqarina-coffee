@@ -205,11 +205,11 @@ export default function App() {
         <div className="hidden sm:block absolute top-0 left-1/2 -translate-x-1/2 w-[126px] h-[37px] bg-black rounded-b-[20px] z-[100]"/>
         <div className="hidden sm:block h-[47px] shrink-0"/>
 
-        <TopBar cartCount={cartCount} onCart={() => setCartOpen(true)} onMenu={() => setMenuOpen(true)} onSearch={() => setSearchOpen(o => !o)}/>
+        <TopBar cartCount={cartCount} onCart={() => setCartOpen(true)} onMenu={() => setMenuOpen(true)} onSearch={() => { if (!searchOpen && activeNav === "home") setActiveNav("shop"); setSearchOpen(o => !o); }}/>
         {searchOpen && <SearchBar value={searchQuery} onChange={setSearchQuery} onClose={() => { setSearchQuery(""); setSearchOpen(false); }}/>}
 
         <div className="flex-1 overflow-y-auto [scrollbar-width:none]">
-          {activeNav === "home" && <HomeScreen coffees={filtered} activeCat={activeCat} setActiveCat={setActiveCat} onAdd={addToCart} onOpen={setOpenCoffee} onExplore={() => document.getElementById("home-catalog")?.scrollIntoView({ behavior: "smooth", block: "start" })} onFarms={() => setActiveNav("farms")} onCurators={() => setActiveNav("curators")} favorites={favorites} onToggleFav={toggleFav} onOpenFilters={() => setFiltersOpen(true)} hasActiveFilters={hasActiveFilters || !!searchQuery} onClearAll={clearAll}/>}
+          {activeNav === "home" && <HomeScreen coffeeCount={allCoffees.length} onExplore={() => setActiveNav("shop")} onFarms={() => setActiveNav("farms")} onCurators={() => setActiveNav("curators")}/>}
           {activeNav === "shop" && <CatalogScreen coffees={filtered} activeCat={activeCat} setActiveCat={setActiveCat} onAdd={addToCart} onOpen={setOpenCoffee} favorites={favorites} onToggleFav={toggleFav} onOpenFilters={() => setFiltersOpen(true)} hasActiveFilters={hasActiveFilters || !!searchQuery} onClearAll={clearAll}/>}
           {activeNav === "farms" && <FarmsScreen fincas={producerFincas} onOpenFarm={openFarmByName} kicker="ORIGEN" title={`${producerFincas.length} fincas`}/>}
           {activeNav === "curators" && <FarmsScreen fincas={curatorBrands} onOpenFarm={openFarmByName} kicker="MARCAS" title={`${curatorBrands.length} tostadores`}/>}

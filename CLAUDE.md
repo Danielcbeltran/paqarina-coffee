@@ -120,11 +120,11 @@ STORAGE = {
 - **`TopBar`** — header con menú (hamburguesa), logo Paqarina, búsqueda y carrito.
 - **`BottomNav`** — 5 pestañas: Inicio · Cafés · Fincas · Tostadores · Tú.
 - **`SideMenu`** — drawer izquierdo que abre la hamburguesa. Lista navegación + acciones (carrito, suscripción) + saludo al cliente.
-- **`Hero`** — sección de bienvenida del Inicio con CTA "EXPLORAR CAFÉS" (scroll dentro de Inicio), FINCAS y TOSTADORES (navegan a pestañas).
+- **`Hero`** — sección de bienvenida del Inicio con CTA "EXPLORAR CAFÉS", FINCAS y TOSTADORES (los tres navegan a sus pestañas).
 - **`CategoryChips`** — chips horizontales (Todos, Favoritos, Microlotes, Comercio justo, Tueste a pedido, Mujeres caficultoras, Anaeróbicos).
 
 ### Pantallas (Screens) (`components/coffee.tsx`, `farms.tsx`, `seller.tsx`)
-- **`HomeScreen`** — Hero + CategoryChips + listado de cafés (con `id="home-catalog"` para el scroll del botón EXPLORAR CAFÉS) + ProducerStories + OriginMap + footer.
+- **`HomeScreen`** — pantalla de bienvenida limpia, **sin catálogo**: Hero + banda-resumen "N cafés disponibles →" (navega a Cafés) + ProducerStories + OriginMap + footer. El catálogo vive en la pestaña Cafés; buscar desde Inicio también salta a Cafés.
 - **`CatalogScreen`** — versión enfocada del catálogo (solo header + chips + lista).
 - **`FarmsScreen`** — lista de fincas o tostadores (mismo componente, distinto contenido según pestaña activa).
 - **`ProfileScreen`** — sección Tú. Si no eres vendedor, muestra `BuyerProfile`. Si lo eres, un **toggle Comprador/Vendedor** arriba que cambia entre:

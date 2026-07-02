@@ -299,17 +299,15 @@ function FiltersButton({ onOpenFilters, hasActiveFilters }: { onOpenFilters: () 
   );
 }
 
-export function HomeScreen({ coffees, activeCat, setActiveCat, onAdd, onOpen, onExplore, onFarms, onCurators, favorites, onToggleFav, onOpenFilters, hasActiveFilters, onClearAll }: CatalogProps & { onExplore: () => void; onFarms: () => void; onCurators: () => void }) {
+/* Inicio limpio: solo bienvenida y editorial. El catálogo vive en la pestaña "Cafés". */
+export function HomeScreen({ coffeeCount, onExplore, onFarms, onCurators }: { coffeeCount: number; onExplore: () => void; onFarms: () => void; onCurators: () => void }) {
   return (
     <>
       <Hero onExplore={onExplore} onFarms={onFarms} onCurators={onCurators}/>
-      <CategoryChips active={activeCat} setActive={setActiveCat}/>
-      <div id="home-catalog" className="pt-2 px-[18px] pb-1 scroll-mt-2">
-        <SectionHeader kicker="SELECCIÓN ACTIVA" title={`${coffees.length} cafés disponibles`} right={<FiltersButton onOpenFilters={onOpenFilters} hasActiveFilters={hasActiveFilters}/>}/>
-        {coffees.length === 0
-          ? <EmptyState title="Sin resultados" message="No encontramos cafés que coincidan con tu búsqueda o filtros." ctaLabel="LIMPIAR TODO" onCta={onClearAll}/>
-          : <CoffeeList coffees={coffees} onAdd={onAdd} onOpen={onOpen} favorites={favorites} onToggleFav={onToggleFav}/>}
-      </div>
+      <button onClick={onExplore} className="w-full bg-transparent border-y border-line py-4 px-[22px] flex items-center justify-between cursor-pointer">
+        <span className="font-sans text-[9px] tracking-[0.28em] text-gold font-semibold">SELECCIÓN ACTIVA</span>
+        <span className="font-serif text-base text-ink">{coffeeCount} cafés disponibles <span className="text-dim font-sans text-xs">→</span></span>
+      </button>
       <ProducerStories onSeeAll={onFarms}/>
       <OriginMap/>
       <div className="pt-8 px-[22px] pb-6 text-center border-t border-line">
